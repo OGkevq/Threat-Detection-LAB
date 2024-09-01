@@ -19,7 +19,18 @@ The Threat Detection Lab project was a simulated scenario in which a penetration
 - Sigma Rule Builder
 
 ## Steps
-drag & drop screenshots here or use imgur and reference them using imgsrc
+This lab was set up on a virtual machine through TryHackMe
+1. Analyze the "sample1.exe" using the the Malware Sandbox Tool
+2. Review the results from the analysis
+
+  ![Threat Detection sc1 2](https://github.com/user-attachments/assets/e0573754-07f8-4874-bc2e-824b1affcb97)
+
+  Ref 1: The image shows the results from the analysis
+  
+3. After seeing the hashes I put together the
+4. ethete
+5. Tregreu
+6. rguegru
 
 Every screenshot should have some text explaining what the screenshot is about.
 
