@@ -46,19 +46,31 @@ This lab was set up on a virtual machine through TryHackMe
   Ref 3: Creation of the DNS rule to prevent connection to "emundyn.bresonicz.info" 
   
 11. For the new malware "sample4.exe" blocking hashes, IPs, or domains won't help. I need to use a new method. With this in mind, I use the Malware Sandbox Tool to analyze "sample4.exe."
-12. I noticed the malware causes the machine to turn off real-time monitoring. This seems like a command I can prevent.
+12. I noticed the malware causes the machine to turn off Windows Defender real-time monitoring. This seems like a command I can prevent.
 
   ![Threat Detection sc4 1](https://github.com/user-attachments/assets/d6742774-483a-4585-8ed5-9379233bb9ef)
 
   Ref 4: The image shows a portion of the results of the malware scan malware on "sample4.exe
 
-13. 
-14. I use this information along with the Sigma Rule Builder to create a t
-15. tr
-16. rtr
-17. tr
-18. t
-19. grg
+13.  I use this information and the Sigma Rule Builder to create a rule that blocks the malware from modifying Windows Defender Real-Time Protection.
+
+  ![Threat Detection sc4 5](https://github.com/user-attachments/assets/ecc24207-3dd0-4b16-8ba3-c6d27cb51a0c)
+
+  Ref 5: The Sigma Rule validation is shown to prevent the tampering of Real-Time Monitoring
+
+14. Defending against the attack tools is great and the most time-consuming method of defense for attackers so far, but attackers can develop new techniques when they are persistent. For "sample5.exe" the pentester has a new technique and tools. I must analyze some logs to find something unique or abnormal about them to detect the attack.
+
+  ![Threat Detection sc6](https://github.com/user-attachments/assets/2e1830e8-5e34-4c56-a0d6-e0bfce462a2f)
+
+  Ref 6: The image shows the logs I analyzed.
+  
+15. It took me a while to figure out exactly what I was looking at. The first pattern I noticed was the frequent connections to the IP address 51.102.10.19 from the source address and it maintained the size of 97 bytes. Then I noticed that the connection to the port was being recorded every 30 minutes. I had good information but I wasn't sure what to do with it. So I looked over the tools in the Sigma Rule Builder.
+16. There I found a Network Connection portion of the sysmon Event Logs. I created a rule that detected connections from any remote IP with a size of 97 bytes and a frequency of 1800s (30 min in seconds) This ended up being correct and it was only when I looked over the MITRE ATT&CK ID that I realized this could be an example of a malware connecting to a C2 server. 
+17. T
+18. rtr
+19. tr
+20. t
+21. grg
 
 Every screenshot should have some text explaining what the screenshot is about.
 
