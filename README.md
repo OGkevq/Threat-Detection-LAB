@@ -66,14 +66,10 @@ This lab was set up on a virtual machine through TryHackMe
   
 15. It took me a while to figure out exactly what I was looking at. The first pattern I noticed was the frequent connections to the IP address 51.102.10.19 from the source address and it maintained the size of 97 bytes. Then I noticed that the connection to the port was being recorded every 30 minutes. I had good information but I wasn't sure what to do with it. So I looked over the tools in the Sigma Rule Builder.
 16. There I found a Network Connection portion of the sysmon Event Logs. I created a rule that detected connections from any remote IP with a size of 97 bytes and a frequency of 1800s (30 min in seconds) This ended up being correct and it was only when I looked over the MITRE ATT&CK ID that I realized this could be an example of a malware connecting to a C2 server. 
-17. T
-18. rtr
-19. tr
-20. t
-21. grg
+17. For the last challenge I had to analyze  the command logs from "sample6.exe"
+18. I immediately took note of "%temp%\exfiltr8.log" being created and used as an information hub. I couldn't just block the commands themselves as they are necessary commands. Instead, I used the Sigma Rule Builder to create a rule on file creation & modification.
+19. I set the file path as %temp% and the file name as "exfltra8.log" to create the new rule. I also identified the ATT&CK ID as Exfiltration (TA0010).
+20. I validated the rule and got congrats on completion.
+21. End of Lab
 
-Every screenshot should have some text explaining what the screenshot is about.
 
-Example below.
-
-*Ref 1: Network Diagram*
