@@ -20,7 +20,7 @@ The Threat Detection Lab project was a simulated scenario in which a penetration
 
 ## Steps
 This lab was set up on a virtual machine through TryHackMe
-1. Analyze the "sample1.exe" using the the Malware Sandbox Tool
+1. Analyze the "sample1.exe" using the Malware Sandbox Tool
 2. Review the results from the analysis
 
   ![Threat Detection sc1 2](https://github.com/user-attachments/assets/e0573754-07f8-4874-bc2e-824b1affcb97)
@@ -36,9 +36,9 @@ This lab was set up on a virtual machine through TryHackMe
 
   Ref 2: The image above shows the new firewall rule being applied.
   
-7. A motivated attacker can get around this rule by using a new public IP address. A new method is needed for the next sample. With "sample3.exe" the perntester has a new public IP address with plenty more backups just in case. 
-8. Analyze the "sample3.exe" using the the Malware Sandbox Tool
-9. The results from the analysis show new suspicious connections. This time instead of focusing on the IP addresses, I looked at the domains. It seemed the malware connected to the domain "emundyn.bresonicz.info" multiple times.
+7. A motivated attacker can get around this rule by using a new public IP address. A new method is needed for the next sample. With "sample3.exe" the pentester has a new public IP address with plenty more backups just in case. 
+8. Analyze the "sample3.exe" using the Malware Sandbox Tool
+9. The results from the analysis show new suspicious connections. This time, instead of focusing on the IP addresses, I looked at the domains. It seemed the malware connected to the domain "emundyn.bresonicz.info" multiple times.
 10. I created a DNS rule using the DNS Rule Manager to prevent access to the suspicious domain
 
   ![Threat Detection sc3 1](https://github.com/user-attachments/assets/ddf7e102-5b26-4e7a-9503-d94ae79b856b)
@@ -65,8 +65,8 @@ This lab was set up on a virtual machine through TryHackMe
   Ref 6: The image shows the logs I analyzed.
   
 15. It took me a while to figure out exactly what I was looking at. The first pattern I noticed was the frequent connections to the IP address 51.102.10.19 from the source address and it maintained the size of 97 bytes. Then I noticed that the connection to the port was being recorded every 30 minutes. I had good information but I wasn't sure what to do with it. So I looked over the tools in the Sigma Rule Builder.
-16. There I found a Network Connection portion of the sysmon Event Logs. I created a rule that detected connections from any remote IP with a size of 97 bytes and a frequency of 1800s (30 min in seconds) This ended up being correct and it was only when I looked over the MITRE ATT&CK ID that I realized this could be an example of a malware connecting to a C2 server. 
-17. For the last challenge I had to analyze  the command logs from "sample6.exe"
+16. There I found a Network Connection portion of the sysmon Event Logs. I created a rule that detected connections from any remote IP with a size of 97 bytes and a frequency of 1800s (30 min in seconds) This ended up being correct, and it was only when I looked over the MITRE ATT&CK ID that I realized this could be an example of malware connecting to a C2 server. 
+17. For the last challenge, I had to analyze  the command logs from "sample6.exe"
 18. I immediately took note of "%temp%\exfiltr8.log" being created and used as an information hub. I couldn't just block the commands themselves as they are necessary commands. Instead, I used the Sigma Rule Builder to create a rule on file creation & modification.
 19. I set the file path as %temp% and the file name as "exfltra8.log" to create the new rule. I also identified the ATT&CK ID as Exfiltration (TA0010).
 20. I validated the rule and got congrats on completion.
